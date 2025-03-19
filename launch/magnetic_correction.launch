@@ -1,0 +1,34 @@
+<launch>
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_global">
+        <param name="frequency" value="30"/>
+        <param name="sensor_timeout" value="0.1"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="base_link_frame" value="base_link"/>
+        <param name="world_frame" value="world"/>
+        
+        <remap from="odometry/filtered" to="/odometry/filtered"/>
+        
+        <param name="imu0" value="/imu/data"/>
+        <rosparam param="imu0_config">[false, false, false,
+                                      true,  true,  true,
+                                      false, false, false,
+                                      true,  true,  true,
+                                      false, false, false]</rosparam>
+        <param name="imu0_differential" value="false"/>
+    </node>
+
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform">
+        <param name="magnetic_declination_radians" value="0"/> 
+        <param name="zero_altitude" value="true"/>
+        <param name="broadcast_utm_transform" value="false"/>
+        <param name="publish_filtered_gps" value="true"/>
+        
+        <param name="datum" value="[37.7749, -122.4194, 0.0]"/> 
+        
+        <remap from="/imu/data" to="/imu/data"/>
+        <remap from="/gps/fix" to="/gps/filtered"/> 
+        <remap from="/odometry/filtered" to="/odometry/filtered"/>
+    </node>
+
+    <node pkg="magnetic_declination_converter" type="orientation_converter" name="orientation_converter"/>
+</launch>
