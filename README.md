@@ -26,7 +26,7 @@ Ensure you have the following installed:
 ```bash
 # Install GeographicLib datasets (WMM)
 sudo apt install geographiclib-tools
-wget -O /usr/share/GeographicLib/magnetic.wmm2020 https://geographiclib.sourceforge.io/magnetic.html
+wget -O /usr/share/GeographicLib/magnetic.wmm2025 https://geographiclib.sourceforge.io/magnetic.html
 
 # Clone & Build
 mkdir -p ~/ros_ws/src
