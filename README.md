@@ -4,11 +4,11 @@
 The **Orientation Converter** is a ROS node that corrects the orientation of a robot by compensating for the Earth's magnetic declination using the World Magnetic Model (WMM). It takes GPS and IMU quaternion data as input and publishes a corrected quaternion with true north alignment.  
 
 ## Key Features  
-✅ Uses **GeographicLib** to calculate real-time magnetic declination  
-✅ Applies **Quaternion transformations** to correct yaw values  
-✅ Subscribes to **GPS and IMU quaternion data**  
-✅ Publishes **corrected orientation** with declination adjustment  
-✅ Utilizes **ROS threading and smart pointers** for efficient processing  
+- Uses **GeographicLib** to calculate real-time magnetic declination  
+- Applies **Quaternion transformations** to correct yaw values  
+- Subscribes to **GPS and IMU quaternion data**  
+- Publishes **corrected orientation** with declination adjustment  
+- Utilizes **ROS threading and smart pointers** for efficient processing  
 
 ---
 
@@ -81,5 +81,9 @@ source devel/setup.bash
 
 ## Usage  
 ```bash
+
 roslaunch magnetic_declination_converter magnetic_correction.launch
+
+rostopic pub /gps/filtered sensor_msgs/NavSatFix '{latitude: 37.7749, longitude: -122.4194, altitude: 10.0}'
+
 ```
